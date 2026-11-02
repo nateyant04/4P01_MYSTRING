@@ -2,20 +2,35 @@ package org.example;
 
 public class MyString_Imp implements MyString{
     private char[] str;
+
     public MyString_Imp() {
+        //initializes a newly created String object so that it represents
+        //and empty character sequence
         this.str = new char [0];
     }
 
     public MyString_Imp(char[] str) {
+        //allocates a new String so that it represents the sequence of characters currently
+        //contained in the character array argument.
+        this.str = new char[str.length];
+        for (int i = 0; i < str.length; i++) {
+            this.str[i] = str[i];
+        }
     }
 
     public MyString_Imp(char[] value, int offset, int count) {
+        //allocates a new string that contains characters from a subarray
+        //of the character array argument.
         this.str = new char[count];
     }
 
-    public MyString_Imp(String str) {
-        this.str = str.toCharArray();
+    public MyString_Imp(String orignal) {
+        //initalizes a newly created String object so that it represents the
+        //same sequence of characters as the argument;
+        //in other words, the newly created stirng is a copy of the argument string
+        this.str = orignal.toCharArray();
     }
+
 
 
 
