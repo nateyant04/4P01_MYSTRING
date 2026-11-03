@@ -32,15 +32,44 @@ public class MyString_Imp implements MyString{
     }
 
 
-
-
+    // Character access methods
     @Override
     public char charAt(int index) {
-        return 0;
+        return str[index];
     }
 
     @Override
-    public int compareTo(MyString anotherStr) {
+    public char[] toCharArray() {
+        char[] result = str.clone();
+        return result;
+    }
+
+    // Length and emptiness checks
+    @Override
+    public int length() {
+        return str.length;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        if (str.length == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    // Comparison methods
+    @Override
+    //compares 2 strings lexicographically
+    public int compareTo(MyString anotherStr) {//need to fix this
+        char[] param = anotherStr.toCharArray();
+        for (int i = 0; i < Math.min(str.length, param.length); i++) {
+            if (str[i] < param[i]) {
+                return -1;
+            } else if (str[i] > param[i]) {
+                return 1;
+            }
+        }
         return 0;
     }
 
@@ -50,25 +79,11 @@ public class MyString_Imp implements MyString{
     }
 
     @Override
-    public MyString concat(MyString str) {
-        return null;
-    }
-
-    @Override
-    public boolean contains(CharSequence s) {
-        return false;
-    }
-
-    @Override
-    public boolean endsWith(MyString suffix) {
-        return false;
-    }
-
-    @Override
     public boolean equalsIgnoreCase(MyString anotherStr) {
         return false;
     }
 
+    // Search methods - indexOf
     @Override
     public int indexOf(int ch) {
         return 0;
@@ -99,11 +114,7 @@ public class MyString_Imp implements MyString{
         return 0;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
+    // Search methods - lastIndexOf
     @Override
     public int lastIndexOf(int ch) {
         return 0;
@@ -119,16 +130,18 @@ public class MyString_Imp implements MyString{
         return 0;
     }
 
+    // Pattern matching methods
     @Override
-    public int length() {
-        return 0;
+    public boolean contains(CharSequence s) {
+        return false;
     }
 
     @Override
-    public MyString strip() {
-        return null;
+    public boolean endsWith(MyString suffix) {
+        return false;
     }
 
+    // Substring extraction methods
     @Override
     public MyString substring(int beginIndex) {
         return null;
@@ -139,13 +152,21 @@ public class MyString_Imp implements MyString{
         return null;
     }
 
+    // String modification methods
     @Override
-    public char[] toCharArray() {
-        return new char[0];
+    public MyString concat(MyString str) {
+        return null;
+    }
+
+    @Override
+    public MyString strip() {
+        return null;
     }
 
     @Override
     public MyString trim() {
         return null;
     }
+
+    // Conversion methods
 }
