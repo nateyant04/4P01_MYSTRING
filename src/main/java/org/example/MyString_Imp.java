@@ -63,16 +63,38 @@ public class MyString_Imp implements MyString{
     //compares 2 strings lexicographically
     public int compareTo(MyString anotherStr) {//need to fix this
         char[] param = anotherStr.toCharArray();
-        for (int i = 0; i < Math.min(str.length, param.length); i++) {
-            if (str[i] < param[i]) {
-                return -1;
-            } else if (str[i] > param[i]) {
-                return 1;
+        if (str.length < param.length) {//when the parameter is longer
+            for (int i = 0; i < str.length; i++) {
+                if (str[i] < param[i]) {
+                    return -1;
+                } else if (str[i] > param[i]) {
+                    return 1;
+                }
+            }
+            return -1;
+
+        } else if (str.length > param.length) {//when str is longer
+            for (int i = 0; i < param.length; i++) {
+                if (str[i] < param[i]) {
+                    return -1;
+                } else if (str[i] > param[i]) {
+                    return 1;
+                }
+            }
+            return 1;
+        } else {//when same length
+            for (int i = 0; i < str.length; i++) {
+                if (str[i] < param[i]) {
+                    return -1;
+                } else if (str[i] > param[i]) {
+                    return 1;
+                }
             }
         }
+
         return 0;
     }
-
+    //compares 2 strings lexiographically but treats all letters as lower case
     @Override
     public int compareToIgnoreCase(MyString str) {
         return 0;

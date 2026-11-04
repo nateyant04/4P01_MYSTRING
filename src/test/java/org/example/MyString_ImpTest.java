@@ -47,38 +47,59 @@ class MyString_ImpTest {
     }
 
     // Comparison methods
+    //taking cases into consideration. myString_Imp < parameter = -1, equal = 0, myString_imp > paramter = 1
     @Test
-    void testCompareToSameLength() {
-        //taking cases into consideration. myString_Imp < parameter = -1, equal = 0, myString_imp > paramter = 1
+    void testCompareToSameLengthEqual() {
         var myString_Imp = new MyString_Imp("abcdefg");
         var same = new MyString_Imp("abcdefg");
-        var greater = new MyString_Imp("abcdefh");
-        var less = new MyString_Imp("abcdeff");
         assertEquals(0, myString_Imp.compareTo(same));
+    }
+    @Test
+    void testCompareToSameLengthLess() {
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var greater = new MyString_Imp("abcdefh");
         assertEquals(-1, myString_Imp.compareTo(greater));
+    }
+    @Test
+    void testCompareToSameLengthGreater() {
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var less = new MyString_Imp("abcdeff");
         assertEquals(1, myString_Imp.compareTo(less));
     }
     @Test
-    void testCompareToDifferentLength() {//takes cases into consideration.
+    void testCompareToDifferentLengthShorterSame() {//takes cases into consideration.
         var myString_Imp = new MyString_Imp("abcdefg");
         var shorterSame = new MyString_Imp("abcdef");
-        var shorterGreater = new MyString_Imp("abcdeg");
-        var longer = new MyString_Imp("abcdefga");
         assertEquals(1, myString_Imp.compareTo(shorterSame));
+    }
+    @Test
+    void testCompareToDifferentLengthShorterGreater() {
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var shorterGreater = new MyString_Imp("abcdeg");
         assertEquals(-1, myString_Imp.compareTo(shorterGreater));
+    }
+    @Test
+    void testCompareToDifferentLengthLonger() {
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var longer = new MyString_Imp("abcdefga");
         assertEquals(-1, myString_Imp.compareTo(longer));
     }
 
     @Test
-    void testCompareToIgnoreCase() {
-        var myString_Imp = new MyString_Imp("abcdefg");
-        var same = new MyString_Imp("ABCDEFG");
-        assertEquals(0, myString_Imp.compareToIgnoreCase(same));
-        var different = new MyString_Imp("abcdefh");
-        assertEquals(-1, myString_Imp.compareToIgnoreCase(different));
+    void testCompareToIgnoreCaseLess() {
+        var myString_Imp = new MyString_Imp("aBcdEFg");
+        var param = new MyString_Imp("AbCDefh");
+        assertEquals(0, myString_Imp.compareToIgnoreCase(param));
 
     }
 
+    @Test
+    void testCompareToIgnoreCaseGreater() {
+        var myString_Imp = new MyString_Imp("aBcdEFg");
+        var param = new MyString_Imp("AbCDefF");
+        assertEquals(0, myString_Imp.compareToIgnoreCase(param));
+
+    }
 
     // Search methods - indexOf
 
