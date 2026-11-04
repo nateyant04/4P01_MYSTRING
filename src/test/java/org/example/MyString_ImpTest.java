@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MyString_ImpTest {
 
     //Character access methods
+    //finished
     @Test
     void charAt() {
         var myString_Imp = new MyString_Imp("abcdefg");
@@ -25,6 +26,7 @@ class MyString_ImpTest {
     }
 
     //length and emptiness checks
+    //finished
     @Test
     void testLengthIsZero() {
         var myString_Imp = new MyString_Imp();
@@ -48,6 +50,7 @@ class MyString_ImpTest {
 
     // Comparison methods
     //taking cases into consideration. myString_Imp < parameter = -1, equal = 0, myString_imp > paramter = 1
+    //finished
     @Test
     void testCompareToSameLengthEqual() {
         var myString_Imp = new MyString_Imp("abcdefg");
@@ -92,7 +95,6 @@ class MyString_ImpTest {
         assertEquals(-1, myString_Imp.compareToIgnoreCase(param));
 
     }
-
     @Test
     void testCompareToIgnoreCaseGreater() {
         var myString_Imp = new MyString_Imp("AbCdEfG");
@@ -102,9 +104,37 @@ class MyString_ImpTest {
     }
 
     // Search methods - indexOf
+    @Test
+    void testIndexOf() {//indexOf(ch)
+        var myString_Imp = new MyString_Imp("abctefgh");
+        assertEquals(7, myString_Imp.indexOf('h'));
+    }
+    @Test
+    void testIndexOfFromIndex() {//indexOf(ch, fromIndex)
+        var myString_Imp = new MyString_Imp("abcdefg");
+        assertEquals(3, myString_Imp.indexOf('d', 2));
+    }
 
+    @Test
+    void testIndexOfBeginAndEnd(){//indexOf(ch, beginIndex, endIndex
+        var myString_Imp = new MyString_Imp("abcdefg");
+        assertEquals(2, myString_Imp.indexOf('c', 2, 5));
+    }
 
     // Search methods - lastIndexOf
+    @Test
+    void testLastIndexOf(){
+        var myString_Imp = new MyString_Imp("aaaaaaaaaaaaa");
+        assertEquals(12, myString_Imp.lastIndexOf('a'));
+    }
+
+    @Test
+    void testLastIndexOfFromIndex(){
+        var myString_Imp = new MyString_Imp("aaagaaaa");
+        assertEquals(3, myString_Imp.lastIndexOf('g', 3));
+    }
+
+
 
     // Pattern matching methods
 

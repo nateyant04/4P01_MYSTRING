@@ -124,16 +124,31 @@ public class MyString_Imp implements MyString{
     // Search methods - indexOf
     @Override
     public int indexOf(int ch) {
+        for (int i =0; i <str.length; i++) {
+            if (str[i] == ch){
+                return i;
+            }
+        }
         return 0;
     }
 
     @Override
     public int indexOf(int ch, int fromIndex) {
+        for (int i = fromIndex; i <str.length; i++) {
+            if (str[i] == ch){
+                return i;
+            }
+        }
         return 0;
     }
 
     @Override
     public int indexOf(int ch, int beginIndex, int endIndex) {
+        for (int i = beginIndex; i <= endIndex; i++) {
+            if (str[i] == ch){
+                return i;
+            }
+        }
         return 0;
     }
 
@@ -155,12 +170,24 @@ public class MyString_Imp implements MyString{
     // Search methods - lastIndexOf
     @Override
     public int lastIndexOf(int ch) {
-        return 0;
+        int lastIndex = -1;
+        for (int i =0; i <str.length; i++) {
+            if (str[i] == ch){
+                lastIndex = i;
+            }
+        }
+        return lastIndex;
     }
 
     @Override
     public int lastIndexOf(int ch, int fromIndex) {
-        return 0;
+        int lastIndex = -1;
+        for (int i = fromIndex; i <str.length; i++) {
+            if (str[i] == ch){
+                lastIndex = i;
+            }
+        }
+        return lastIndex;
     }
 
     @Override
