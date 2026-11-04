@@ -89,15 +89,15 @@ class MyString_ImpTest {
     void testCompareToIgnoreCaseLess() {
         var myString_Imp = new MyString_Imp("aBcdEFg");
         var param = new MyString_Imp("AbCDefh");
-        assertEquals(0, myString_Imp.compareToIgnoreCase(param));
+        assertEquals(-1, myString_Imp.compareToIgnoreCase(param));
 
     }
 
     @Test
     void testCompareToIgnoreCaseGreater() {
-        var myString_Imp = new MyString_Imp("aBcdEFg");
-        var param = new MyString_Imp("AbCDefF");
-        assertEquals(0, myString_Imp.compareToIgnoreCase(param));
+        var myString_Imp = new MyString_Imp("AbCdEfG");
+        var param = new MyString_Imp("aBcDeFf");
+        assertEquals(1, myString_Imp.compareToIgnoreCase(param));
 
     }
 

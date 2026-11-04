@@ -96,8 +96,24 @@ public class MyString_Imp implements MyString{
     }
     //compares 2 strings lexiographically but treats all letters as lower case
     @Override
-    public int compareToIgnoreCase(MyString str) {
-        return 0;
+    public int compareToIgnoreCase(MyString anotherStr) {
+        //creates a new MyString_Imp object that contains the lower case version of str
+        char[] lowerStr;
+        lowerStr = str.clone();
+        for (int i = 0; i < lowerStr.length; i++) {
+            lowerStr[i] = Character.toLowerCase(lowerStr[i]);
+        }
+        var loweredStr = new MyString_Imp(lowerStr);
+
+        //creates a new MyString_Imp object that contains the lower case version of anotherStr
+        char[] lowerParam;
+        lowerParam = anotherStr.toCharArray();
+        for (int i = 0; i < lowerParam.length; i++) {
+            lowerParam[i] = Character.toLowerCase(lowerParam[i]);
+        }
+        var loweredParam = new MyString_Imp(lowerParam);
+        return loweredStr.compareTo(loweredParam);
+
     }
 
     @Override
