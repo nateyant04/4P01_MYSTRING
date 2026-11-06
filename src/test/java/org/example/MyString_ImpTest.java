@@ -104,6 +104,7 @@ class MyString_ImpTest {
     }
 
     // Search methods - indexOf
+    //index of a character method tests
     @Test
     void testIndexOf() {//indexOf(ch)
         var myString_Imp = new MyString_Imp("abctefgh");
@@ -121,19 +122,25 @@ class MyString_ImpTest {
         assertEquals(2, myString_Imp.indexOf('c', 2, 5));
     }
 
-    // Search methods - lastIndexOf
+    //lastIndex Of a character test's
     @Test
-    void testLastIndexOf(){
+    void testLastIndexOf(){//lastIndexOf(ch)
         var myString_Imp = new MyString_Imp("aaaaaaaaaaaaa");
         assertEquals(12, myString_Imp.lastIndexOf('a'));
     }
 
     @Test
-    void testLastIndexOfFromIndex(){
+    void testLastIndexOfFromIndex(){//lastIndexOf(ch, fromIndex)
         var myString_Imp = new MyString_Imp("aaagaaaa");
         assertEquals(3, myString_Imp.lastIndexOf('g', 3));
     }
 
+    @Test
+    void testIndexOfStr(){//IndexOf(str)
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var param = new MyString_Imp("efg");
+        assertEquals(3, myString_Imp.indexOf(param));
+    }
 
 
     // Pattern matching methods

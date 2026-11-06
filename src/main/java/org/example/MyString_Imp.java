@@ -152,20 +152,6 @@ public class MyString_Imp implements MyString{
         return 0;
     }
 
-    @Override
-    public int indexOf(MyString str) {
-        return 0;
-    }
-
-    @Override
-    public int indexOf(MyString str, int fromIndex) {
-        return 0;
-    }
-
-    @Override
-    public int indexOf(MyString str, int beginIndex, int endIndex) {
-        return 0;
-    }
 
     // Search methods - lastIndexOf
     @Override
@@ -190,10 +176,41 @@ public class MyString_Imp implements MyString{
         return lastIndex;
     }
 
+
+    //index of a string inside my string method
     @Override
-    public int lastIndexOf(MyString str) {
+    public int indexOf(MyString str) {
+        char[] paramArray = str.toCharArray();
+        char[] myArray = str.toCharArray();
+        if (myArray.length < paramArray.length) {
+            return -1;
+        }
+        for (int i = 0; i < myArray.length - paramArray.length; i++) {
+            for (int j = 0; j < paramArray.length; j++) {
+                if (myArray[i + j] != paramArray[j]) {
+                    return -1;
+                }
+            }
+            return i;
+
+        }
+
+    }
+
+    @Override
+    public int indexOf(MyString str, int fromIndex) {
         return 0;
     }
+
+    @Override
+    public int indexOf(MyString str, int beginIndex, int endIndex) {
+        return 0;
+    }
+    @Override
+    public int lastIndexOf(MyString str) {
+
+    }
+
 
     // Pattern matching methods
     @Override
