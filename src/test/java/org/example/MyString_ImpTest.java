@@ -136,11 +136,36 @@ class MyString_ImpTest {
     }
 
     @Test
-    void testIndexOfStr(){//IndexOf(str)
+    void testIndexOfStrExists(){//IndexOf(str)
         var myString_Imp = new MyString_Imp("abcdefg");
         var param = new MyString_Imp("efg");
-        assertEquals(3, myString_Imp.indexOf(param));
+        assertEquals(4, myString_Imp.indexOf(param));
     }
+    @Test void testIndexOfStrNotExists(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var param = new MyString_Imp("aa");
+        assertEquals(-1, myString_Imp.indexOf(param));
+    }
+    @Test void testIndexOfStrTooLong(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var param = new MyString_Imp("abcdefgaa");
+        assertEquals(-2, myString_Imp.indexOf(param));
+    }
+
+    @Test
+    void testIndexOfStrFromIndex(){
+        var myString_Imp = new MyString_Imp("abcdefgaaaefg");
+        var param = new MyString_Imp("efg");
+        assertEquals(10, myString_Imp.indexOf(param, 5));
+    }
+
+    @Test
+    void testIndexOfStrFromIndexToIndexExists(){
+        var myString_Imp = new MyString_Imp("aefghijk");
+        var param = new MyString_Imp("efg");
+        assertEquals(1, myString_Imp.indexOf(param, 0, 3));
+    }
+
 
 
     // Pattern matching methods

@@ -179,36 +179,77 @@ public class MyString_Imp implements MyString{
 
     //index of a string inside my string method
     @Override
-    public int indexOf(MyString str) {
-        char[] paramArray = str.toCharArray();
-        char[] myArray = str.toCharArray();
+    public int indexOf(MyString param) {
+        char[] paramArray = param.toCharArray();
+        char[] myArray = toCharArray();
         if (myArray.length < paramArray.length) {
-            return -1;
+            return -2;
         }
-        for (int i = 0; i < myArray.length - paramArray.length; i++) {
+
+        for (int i = 0; i <= myArray.length - paramArray.length; i++) {
+            boolean match = true;
             for (int j = 0; j < paramArray.length; j++) {
                 if (myArray[i + j] != paramArray[j]) {
-                    return -1;
+                    match = false;
+                    break;
                 }
             }
-            return i;
+            if (match) {
+                return i;
+            }
+        }
+        return -1;
 
+    }
+
+    @Override
+    public int indexOf(MyString param, int fromIndex) {
+        char[] paramArray = param.toCharArray();
+        char[] myArray = toCharArray();
+        if (myArray.length < paramArray.length) {
+            return -2;
         }
 
+        for (int i = fromIndex; i <= myArray.length - paramArray.length; i++) {
+            boolean match = true;
+            for (int j = 0; j < paramArray.length; j++) {
+                if (myArray[i + j] != paramArray[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
-    public int indexOf(MyString str, int fromIndex) {
-        return 0;
-    }
+    public int indexOf(MyString param, int beginIndex, int endIndex) {
+        char[] paramArray = param.toCharArray();
+        char[] myArray = toCharArray();
+        if (myArray.length < paramArray.length) {
+            return -2;
+        }
 
-    @Override
-    public int indexOf(MyString str, int beginIndex, int endIndex) {
-        return 0;
+        for (int i = beginIndex; i <= (endIndex - beginIndex) - (paramArray.length - 1); i++) {
+            boolean match = true;
+            for (int j = 0; j < paramArray.length; j++) {
+                if (myArray[i + j] != paramArray[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return i;
+            }
+        }
+        return -1;
     }
     @Override
     public int lastIndexOf(MyString str) {
-
+        return 0;
     }
 
 
