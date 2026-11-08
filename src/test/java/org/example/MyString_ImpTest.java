@@ -166,9 +166,32 @@ class MyString_ImpTest {
         assertEquals(1, myString_Imp.indexOf(param, 0, 3));
     }
 
+    @Test
+    void testLastIndexOfStrExists(){
+        var myString_Imp = new MyString_Imp("abcdefgefghijk");
+        var param = new MyString_Imp("efg");
+        assertEquals(7, myString_Imp.lastIndexOf(param));
+    }
+
+    @Test
+    void testLastIndexOfStrNotExists(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var param = new MyString_Imp("aa");
+        assertEquals(-1, myString_Imp.lastIndexOf(param));
+    }
 
 
     // Pattern matching methods
+    @Test
+    void testContainsTrue(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        assertTrue(myString_Imp.contains("efg"));
+    }
+    @Test
+    void testContainsFalse(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        assertFalse(myString_Imp.contains("aa"));
+    }
 
     // Substring extraction methods
 

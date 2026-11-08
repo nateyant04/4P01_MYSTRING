@@ -248,14 +248,54 @@ public class MyString_Imp implements MyString{
         return -1;
     }
     @Override
-    public int lastIndexOf(MyString str) {
-        return 0;
+    public int lastIndexOf(MyString param) {
+        char[] paramArray = param.toCharArray();
+        char[] myArray = toCharArray();
+        int lastIndex = -1;
+        if (myArray.length < paramArray.length) {
+            return -2;
+        }
+        for (int i = 0; i <= myArray.length - paramArray.length; i++) {
+            boolean match = true;
+            for (int j = 0; j < paramArray.length; j++) {
+                if (myArray[i + j] != paramArray[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                lastIndex = i;
+            }
+        }
+        return lastIndex;
     }
 
 
     // Pattern matching methods
     @Override
     public boolean contains(CharSequence s) {
+        int searchLength = s.length();
+
+        if (searchLength == 0) {
+            return true;
+        }
+
+        if (str.length < searchLength) {
+            return false;
+        }
+
+        for (int i = 0; i <= str.length - searchLength; i++) {
+            boolean match = true;
+            for (int j = 0; j < searchLength; j++) {
+                if (str[i + j] != s.charAt(j)) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                return true;
+            }
+        }
         return false;
     }
 
