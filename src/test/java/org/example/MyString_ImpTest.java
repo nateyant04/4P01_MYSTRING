@@ -193,6 +193,18 @@ class MyString_ImpTest {
         assertFalse(myString_Imp.contains("aa"));
     }
 
+    @Test
+    void testEndsWithSuffixTrue(){
+        var myString_Imp = new MyString_Imp("abcdefgABD");
+        var mySuffix = new MyString_Imp("ABD");
+        assertTrue(myString_Imp.endsWith(mySuffix));
+    }
+    @Test
+    void testEndsWithSuffixFalse(){
+        var myString_Imp = new MyString_Imp("abcdefgABD");
+        var mySuffix = new MyString_Imp("AB");
+        assertFalse(myString_Imp.endsWith(mySuffix));
+    }
     // Substring extraction methods
 
     // String modification methods

@@ -301,6 +301,21 @@ public class MyString_Imp implements MyString{
 
     @Override
     public boolean endsWith(MyString suffix) {
+        if (suffix.length() <= str.length) {
+            int startIndex = (str.length - suffix.length());
+            boolean match = false;
+            for (int i = 0; i < suffix.length(); i++) {
+                if (str[startIndex + i] == suffix.charAt(i)) {
+                    match = true;
+                } else {
+                    match = false;
+                    break;
+                }
+
+            }
+            return match;
+        }
+
         return false;
     }
 
