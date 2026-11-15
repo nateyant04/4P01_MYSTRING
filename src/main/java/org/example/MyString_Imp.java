@@ -129,7 +129,7 @@ public class MyString_Imp implements MyString{
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class MyString_Imp implements MyString{
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
     @Override
@@ -149,7 +149,7 @@ public class MyString_Imp implements MyString{
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
 
@@ -322,28 +322,80 @@ public class MyString_Imp implements MyString{
     // Substring extraction methods
     @Override
     public MyString substring(int beginIndex) {
-        return null;
+        if (beginIndex < 0 || beginIndex > str.length) throw new IndexOutOfBoundsException();
+        char[] result = new char[str.length - beginIndex];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = str[beginIndex + i];
+        }
+        return new MyString_Imp(result);
     }
 
     @Override
     public MyString substring(int beginIndex, int endIndex) {
-        return null;
+        if (beginIndex < 0 || endIndex > str.length || beginIndex > endIndex) throw new IndexOutOfBoundsException();
+        char[] result = new char[(endIndex - beginIndex) + 1];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = str[beginIndex + i];
+        }
+        return new MyString_Imp(result);
     }
 
     // String modification methods
     @Override
-    public MyString concat(MyString str) {
-        return null;
+    public MyString concat(MyString param) {
+        char[] paramArray = param.toCharArray();
+        char[] myArray = toCharArray();
+        char[] result = new char[myArray.length + paramArray.length];
+        for (int i = 0; i < myArray.length; i++) {
+            result[i] = myArray[i];
+        }
+        for (int i = 0; i < paramArray.length; i++) {
+            result[i + myArray.length] = paramArray[i];
+        }
+        return new MyString_Imp(result);
+
     }
 
     @Override
     public MyString strip() {
-        return null;
+        char[] myArray = toCharArray();
+        char[] result;
+        int startIndex = 0;
+        int endIndex = 0;
+        int i;
+        for (i = 0; i < myArray.length; i++) {
+            if(myArray[i] != ' '){
+                startIndex = i;
+                break;
+            }
+        }
+        for (i = i; i < myArray.length; i++) {
+             if ((i + 1) < myArray.length && myArray[i] != ' ' &&  myArray[i + 1] == ' ') {
+                 endIndex = i;
+             } else if ((i + 1) == myArray.length && myArray[i] != ' '){
+                 endIndex = i;
+             }
+        }
+        result = new char[endIndex - startIndex + 1];
+        for (i = 0; i < result.length; i++) {
+            result[i] = myArray[startIndex + i];
+        }
+        return new MyString_Imp(result);
+
     }
+
 
     @Override
     public MyString trim() {
-        return null;
+        int start = 0;
+        int end = str.length - 1;
+        while (start <= end && str[start] <= ' ') start++;
+        while (end >= start && str[end] <= ' ') end--;
+        char[] result = new char[end - start + 1];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = str[start + i];
+        }
+        return new MyString_Imp(result);
     }
 
     // Conversion methods
