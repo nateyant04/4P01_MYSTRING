@@ -118,7 +118,12 @@ public class MyString_Imp implements MyString{
 
     @Override
     public boolean equalsIgnoreCase(MyString anotherStr) {
-        return false;
+        char[] param = anotherStr.toCharArray();
+        if (str.length != param.length) return false;
+        for (int i = 0; i < str.length; i++) {
+            if (Character.toLowerCase(str[i]) != Character.toLowerCase(param[i])) return false;
+        }
+        return true;
     }
 
     // Search methods - indexOf
@@ -363,12 +368,15 @@ public class MyString_Imp implements MyString{
         int startIndex = 0;
         int endIndex = 0;
         int i;
+        boolean found = false;
         for (i = 0; i < myArray.length; i++) {
             if(myArray[i] != ' '){
                 startIndex = i;
+                found = true;
                 break;
             }
         }
+        if (!found) return new MyString_Imp();
         for (i = i; i < myArray.length; i++) {
              if ((i + 1) < myArray.length && myArray[i] != ' ' &&  myArray[i + 1] == ' ') {
                  endIndex = i;

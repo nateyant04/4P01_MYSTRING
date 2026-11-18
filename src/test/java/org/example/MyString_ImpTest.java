@@ -18,6 +18,13 @@ class MyString_ImpTest {
         assertThrows(IndexOutOfBoundsException.class, () -> myString_Imp.charAt(7));
     }
 
+    // Tests charAt throws IndexOutOfBoundsException when a negative index is passed.
+    @Test
+    void testCharAtNegativeIndex() {
+        var myString_Imp = new MyString_Imp("abcdefg");
+        assertThrows(IndexOutOfBoundsException.class, () -> myString_Imp.charAt(-1));
+    }
+
     // Tests toCharArray returns a char array matching the original string for both String and char[] constructors.
     @Test
     void testToCharArray() {
@@ -53,6 +60,13 @@ class MyString_ImpTest {
         assertTrue(myString_Imp.isEmpty());
         var myString_Imp2 = new MyString_Imp("a");
         assertFalse(myString_Imp2.isEmpty());
+    }
+
+    // Tests isEmpty() returns false for a string containing only spaces.
+    @Test
+    void testIsEmptyWithSpaces() {
+        var myString_Imp = new MyString_Imp("   ");
+        assertFalse(myString_Imp.isEmpty());
     }
 
     // Comparison methods
@@ -124,6 +138,38 @@ class MyString_ImpTest {
 
     }
 
+    // Tests compareToIgnoreCase returns 0 when both strings are equal ignoring case.
+    @Test
+    void testCompareToIgnoreCaseEqual() {
+        var myString_Imp = new MyString_Imp("AbCdEfG");
+        var param = new MyString_Imp("aBcDeFg");
+        assertEquals(0, myString_Imp.compareToIgnoreCase(param));
+    }
+
+    // Tests equalsIgnoreCase returns true when both strings are equal ignoring case.
+    @Test
+    void testEqualsIgnoreCaseTrue() {
+        var myString_Imp = new MyString_Imp("AbCdEfG");
+        var param = new MyString_Imp("aBcDeFg");
+        assertTrue(myString_Imp.equalsIgnoreCase(param));
+    }
+
+    // Tests equalsIgnoreCase returns false when the strings are not equal even ignoring case.
+    @Test
+    void testEqualsIgnoreCaseFalse() {
+        var myString_Imp = new MyString_Imp("AbCdEfG");
+        var param = new MyString_Imp("aBcDeFh");
+        assertFalse(myString_Imp.equalsIgnoreCase(param));
+    }
+
+    // Tests equalsIgnoreCase returns false when strings have different lengths.
+    @Test
+    void testEqualsIgnoreCaseDifferentLength() {
+        var myString_Imp = new MyString_Imp("AbCdEfG");
+        var param = new MyString_Imp("aBcDeF");
+        assertFalse(myString_Imp.equalsIgnoreCase(param));
+    }
+
     // Search methods - indexOf
     //index of a character method tests
     // Tests indexOf(ch) returns the index of the first occurrence of a character.
@@ -145,6 +191,27 @@ class MyString_ImpTest {
     void testIndexOfBeginAndEnd(){
         var myString_Imp = new MyString_Imp("abcdefg");
         assertEquals(2, myString_Imp.indexOf('c', 2, 5));
+    }
+
+    // Tests indexOf(ch) returns 0 when the character is at the first index.
+    @Test
+    void testIndexOfFirst() {
+        var myString_Imp = new MyString_Imp("abcdefg");
+        assertEquals(0, myString_Imp.indexOf('a'));
+    }
+
+    // Tests indexOf(ch) returns the last index when the character is at the end of the string.
+    @Test
+    void testIndexOfLast() {
+        var myString_Imp = new MyString_Imp("abcdefg");
+        assertEquals(6, myString_Imp.indexOf('g'));
+    }
+
+    // Tests indexOf(ch) returns the first occurrence index when the character appears multiple times.
+    @Test
+    void testIndexOfMultipleOccurrences() {
+        var myString_Imp = new MyString_Imp("abcabc");
+        assertEquals(0, myString_Imp.indexOf('a'));
     }
 
     // Tests indexOf(ch) returns -1 when the character does not exist in the string.
@@ -169,6 +236,13 @@ class MyString_ImpTest {
     }
 
     //lastIndex Of a character test's
+    // Tests lastIndexOf(ch) returns -1 when the character does not exist in the string.
+    @Test
+    void testLastIndexOfNotFound(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        assertEquals(-1, myString_Imp.lastIndexOf('z'));
+    }
+
     // Tests lastIndexOf(ch) returns the index of the last occurrence of a character.
     @Test
     void testLastIndexOf(){
@@ -181,6 +255,13 @@ class MyString_ImpTest {
     void testLastIndexOfFromIndex(){
         var myString_Imp = new MyString_Imp("aaagaaaa");
         assertEquals(3, myString_Imp.lastIndexOf('g', 3));
+    }
+
+    // Tests lastIndexOf(ch, fromIndex) returns -1 when the character does not exist after the given index.
+    @Test
+    void testLastIndexOfFromIndexNotFound(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        assertEquals(-1, myString_Imp.lastIndexOf('z', 0));
     }
 
     // Tests indexOf(str) returns the starting index of the first occurrence of the substring.
@@ -205,12 +286,36 @@ class MyString_ImpTest {
         assertEquals(-2, myString_Imp.indexOf(param));
     }
 
+    // Tests indexOf(str, fromIndex) returns -1 when the substring does not exist after the given index.
+    @Test
+    void testIndexOfStrFromIndexNotFound(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var param = new MyString_Imp("abc");
+        assertEquals(-1, myString_Imp.indexOf(param, 1));
+    }
+
+    // Tests indexOf(str, fromIndex) returns -2 when the parameter is longer than this string.
+    @Test
+    void testIndexOfStrFromIndexTooLong(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var param = new MyString_Imp("abcdefgaa");
+        assertEquals(-2, myString_Imp.indexOf(param, 0));
+    }
+
     // Tests indexOf(str, fromIndex) skips earlier occurrences and finds the substring starting from the given index.
     @Test
     void testIndexOfStrFromIndex(){
         var myString_Imp = new MyString_Imp("abcdefgaaaefg");
         var param = new MyString_Imp("efg");
         assertEquals(10, myString_Imp.indexOf(param, 5));
+    }
+
+    // Tests indexOf(str, beginIndex, endIndex) returns -1 when the substring does not exist within the given range.
+    @Test
+    void testIndexOfStrFromIndexToIndexNotFound(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var param = new MyString_Imp("efg");
+        assertEquals(-1, myString_Imp.indexOf(param, 0, 2));
     }
 
     // Tests indexOf(str, beginIndex, endIndex) finds the substring when it exists within the given range.
@@ -237,6 +342,13 @@ class MyString_ImpTest {
         assertEquals(-1, myString_Imp.lastIndexOf(param));
     }
 
+    // Tests lastIndexOf(str) returns -2 when the parameter string is longer than this string.
+    @Test
+    void testLastIndexOfStrTooLong(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var param = new MyString_Imp("abcdefgaa");
+        assertEquals(-2, myString_Imp.lastIndexOf(param));
+    }
 
     // Pattern matching methods
     // Tests contains() returns true when the given substring exists within this string.
@@ -269,6 +381,22 @@ class MyString_ImpTest {
         assertFalse(myString_Imp.endsWith(mySuffix));
     }
 
+    // Tests endsWith() returns false when the suffix is longer than this string.
+    @Test
+    void testEndsWithSuffixTooLong(){
+        var myString_Imp = new MyString_Imp("abc");
+        var mySuffix = new MyString_Imp("abcdefg");
+        assertFalse(myString_Imp.endsWith(mySuffix));
+    }
+
+    // Tests endsWith() returns true when the suffix equals the entire string.
+    @Test
+    void testEndsWithWholeSuffix(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var mySuffix = new MyString_Imp("abcdefg");
+        assertTrue(myString_Imp.endsWith(mySuffix));
+    }
+
 
     // Substring extraction methods
     // Tests substring(beginIndex) returns the correct substring starting from the given index.
@@ -285,6 +413,22 @@ class MyString_ImpTest {
         var myString_Imp = new MyString_Imp("abcdefg");
         var mySub = new MyString_Imp("cdefg");
         assertEquals(0, mySub.compareTo(myString_Imp.substring(2, 6)));
+    }
+
+    // Tests substring(0) returns a string equal to the original.
+    @Test
+    void testSubStringBeginIndexZero(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var mySub = new MyString_Imp("abcdefg");
+        assertEquals(0, mySub.compareTo(myString_Imp.substring(0)));
+    }
+
+    // Tests substring(length) returns an empty string.
+    @Test
+    void testSubStringBeginIndexEqualsLength(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var mySub = new MyString_Imp("");
+        assertEquals(0, mySub.compareTo(myString_Imp.substring(7)));
     }
 
     // Tests substring(beginIndex) throws IndexOutOfBoundsException when beginIndex is negative.
@@ -332,6 +476,15 @@ class MyString_ImpTest {
         assertEquals(0, myConcat.compareTo(myString_Imp.concat(param)));
     }
 
+    // Tests concat() with an empty string returns a string equal to the original.
+    @Test
+    void testConcatEmpty(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var param = new MyString_Imp("");
+        var myConcat = new MyString_Imp("abcdefg");
+        assertEquals(0, myConcat.compareTo(myString_Imp.concat(param)));
+    }
+
     // Tests strip() removes both leading and trailing whitespace.
     @Test
     void testStrip1(){
@@ -364,6 +517,21 @@ class MyString_ImpTest {
         assertEquals(0, myStrip.compareTo(myString_Imp.strip()));
     }
 
+    // Tests strip() returns the same string when there is no leading or trailing whitespace.
+    @Test
+    void testStripNoWhitespace(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var myStrip = new MyString_Imp("abcdefg");
+        assertEquals(0, myStrip.compareTo(myString_Imp.strip()));
+    }
+
+    // Tests strip() returns an empty string when the input contains only whitespace.
+    @Test
+    void testStrip5(){
+        var myString_Imp = new MyString_Imp("     ");
+        var myStrip = new MyString_Imp("");
+        assertEquals(0, myStrip.compareTo(myString_Imp.strip()));
+    }
 
     // Trim tests
     // Tests trim() removes both leading and trailing spaces.
@@ -403,6 +571,22 @@ class MyString_ImpTest {
     void testTrim5(){
         var myString_Imp = new MyString_Imp("     ");
         var myTrim = new MyString_Imp("");
+        assertEquals(0, myTrim.compareTo(myString_Imp.trim()));
+    }
+
+    // Tests trim() returns the same string when there is no leading or trailing whitespace.
+    @Test
+    void testTrimNoWhitespace(){
+        var myString_Imp = new MyString_Imp("abcdefg");
+        var myTrim = new MyString_Imp("abcdefg");
+        assertEquals(0, myTrim.compareTo(myString_Imp.trim()));
+    }
+
+    // Tests trim() removes newline characters (codepoint 10) from both ends.
+    @Test
+    void testTrimNewline(){
+        var myString_Imp = new MyString_Imp("\nabcdefg\n");
+        var myTrim = new MyString_Imp("abcdefg");
         assertEquals(0, myTrim.compareTo(myString_Imp.trim()));
     }
 
